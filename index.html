@@ -1,8 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <title>Penilaian Atlet</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pemantauan Kebugaran Fisik Atlet</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    margin:20px;
+}
+
+table{
+    border-collapse: collapse;
+    width:100%;
+}
+
+th,td{
+    border:1px solid #ccc;
+    padding:8px;
+    text-align:center;
+}
+
+th{
+    background:#f2f2f2;
+}
+
+input[type="number"]{
+    width:80px;
+}
+
+button{
+    padding:10px 20px;
+    cursor:pointer;
+}
+
+h2{
+    margin-bottom:20px;
+}
+</style>
+
 </head>
 <body>
 
@@ -13,8 +50,7 @@
 
 <br><br>
 
-<table border="1" id="assessmentTable">
-
+<table id="assessmentTable">
     <thead>
         <tr>
             <th>Nama Atlet</th>
@@ -24,9 +60,7 @@
             <th>Speed</th>
         </tr>
     </thead>
-
     <tbody></tbody>
-
 </table>
 
 <br>
@@ -35,8 +69,11 @@
     Simpan Semua
 </button>
 
-<script> const API_URL =
+<script>
+
+const API_URL =
 "https://script.google.com/macros/s/AKfycbxwmPE98LExxhDgxW-4d9Du_4YTORadfVetYzbcp5mAMLrL8zTDx4BE6sDj05FNI4-Q/exec";
+
 const athletes = [
   { nama: "Rizky Ramadhan", gender: "Laki-laki", umur: 20 },
   { nama: "Alya Sabrina Putri", gender: "Perempuan", umur: 22 },
@@ -63,39 +100,113 @@ athletes.forEach((athlete) => {
     const row = document.createElement("tr");
 
     row.innerHTML = `
-        <td>${athlete.nama}</td>
+        <td class="nama">${athlete.nama}</td>
 
         <td>
-            <input type="number"
-                   class="vo2"
-                   min="0"
-                   max="100">
+            <input
+                type="number"
+                class="vo2"
+                min="0"
+                max="100">
         </td>
 
         <td>
-            <input type="number"
-                   class="strength"
-                   min="0"
-                   max="100">
+            <input
+                type="number"
+                class="strength"
+                min="0"
+                max="100">
         </td>
 
         <td>
-            <input type="number"
-                   class="agility"
-                   min="0"
-                   max="100">
+            <input
+                type="number"
+                class="agility"
+                min="0"
+                max="100">
         </td>
 
         <td>
-            <input type="number"
-                   class="speed"
-                   step="0.01">
+            <input
+                type="number"
+                class="speed"
+                step="0.01">
         </td>
     `;
 
     tbody.appendChild(row);
+});
 
-}); </script>
-    
+document
+.getElementById("saveBtn")
+.addEventListener("click", async () => {
+
+    const periode =
+    document.getElementById("periode").value;
+
+    if (!periode) {
+        alert("Silakan pilih periode terlebih dahulu.");
+        return;
+    }
+
+    try {
+
+        const rows =
+        document.querySelectorAll(
+            "#assessmentTable tbody tr"
+        );
+
+        for(let i = 0; i < rows.length; i++){
+
+            const row = rows[i];
+            const athlete = athletes[i];
+
+            const payload = {
+
+                tanggal: new Date()
+                    .toLocaleDateString("id-ID"),
+
+                periode: periode,
+
+                nama_atlet: athlete.nama,
+
+                jenis_kelamin:
+                    athlete.gender,
+
+                umur:
+                    athlete.umur,
+
+                vo2max:
+                    row.querySelector(".vo2").value,
+
+                strength:
+                    row.querySelector(".strength").value,
+
+                agility:
+                    row.querySelector(".agility").value,
+
+                speed:
+                    row.querySelector(".speed").value
+            };
+
+            await fetch(API_URL,{
+                method:"POST",
+                body:JSON.stringify(payload)
+            });
+        }
+
+        alert("Data berhasil disimpan ke Google Sheet");
+
+    } catch(error){
+
+        console.error(error);
+
+        alert("Terjadi kesalahan saat menyimpan data");
+    }
+
+});
+
+</script>
+
 </body>
 </html>
