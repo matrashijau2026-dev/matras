@@ -1,1 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Test Input</title>
+</head>
+<body>
 
+<button id="sendBtn">Kirim Data</button>
+
+<script>
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbxwmPE98LExxhDgxW-4d9Du_4YTORadfVetYzbcp5mAMLrL8zTDx4BE6sDj05FNI4-Q/exec";
+
+document.getElementById("sendBtn")
+.addEventListener("click", async () => {
+
+    const payload = {
+        tanggal: "2026-06-06",
+        periode: "Juni 2026",
+        nama_atlet: "Ahmad",
+        jenis_kelamin: "L",
+        umur: 20,
+        vo2max: 85,
+        strength: 88,
+        agility: 90,
+        speed: 3.95
+    };
+
+    try {
+
+        const response = await fetch(API_URL, {
+            method: "POST",
+            body: JSON.stringify(payload)
+        });
+
+        const result = await response.text();
+
+        console.log(result);
+
+        alert("Berhasil");
+
+    } catch(err) {
+
+        console.error(err);
+
+        alert("Gagal");
+    }
+
+});
+
+</script>
+
+</body>
+</html>
