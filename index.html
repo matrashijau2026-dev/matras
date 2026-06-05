@@ -2,55 +2,40 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Test Input</title>
+    <title>Penilaian Atlet</title>
 </head>
 <body>
 
-<button id="sendBtn">Kirim Data</button>
+<h2>PEMANTAUAN KEBUGARAN FISIK ATLIT</h2>
 
-<script>
+<label>Periode:</label>
+<input type="month" id="periode">
 
-const API_URL =
-"https://script.google.com/macros/s/AKfycbxwmPE98LExxhDgxW-4d9Du_4YTORadfVetYzbcp5mAMLrL8zTDx4BE6sDj05FNI4-Q/exec";
+<br><br>
 
-document.getElementById("sendBtn")
-.addEventListener("click", async () => {
+<table border="1" id="assessmentTable">
 
-    const payload = {
-        tanggal: "2026-06-06",
-        periode: "Juni 2026",
-        nama_atlet: "Rizal Baholo",
-        jenis_kelamin: "L",
-        umur: 35,
-        vo2max: 85,
-        strength: 88,
-        agility: 90,
-        speed: 3.95
-    };
+    <thead>
+        <tr>
+            <th>Nama Atlet</th>
+            <th>VO2 Max</th>
+            <th>Strength</th>
+            <th>Agility</th>
+            <th>Speed</th>
+        </tr>
+    </thead>
 
-    try {
+    <tbody></tbody>
 
-        const response = await fetch(API_URL, {
-            method: "POST",
-            body: JSON.stringify(payload)
-        });
+</table>
 
-        const result = await response.text();
+<br>
 
-        console.log(result);
+<button id="saveBtn">
+    Simpan Semua
+</button>
 
-        alert("Berhasil");
-
-    } catch(err) {
-
-        console.error(err);
-
-        alert("Gagal");
-    }
-
-});
-
-</script>
+<script src="app.js"></script>
 
 </body>
 </html>
