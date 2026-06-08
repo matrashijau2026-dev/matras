@@ -17,18 +17,16 @@ html, body {
     background-color: #146c43; /* Warna dasar hijau tua */
 }
 
-/* 📱 OPTIMALISASI HALAMAN LOGIN (ANTI TERPOTONG ATAS BAWAH) */
+/* 📱 OPTIMALISASI HALAMAN LOGIN (PAS DI TENGAH LAYAR) */
 #loginPage {
-    /* Menghilangkan properti 'fixed' di ujung URL agar tidak memicu bug rendering di Android */
     background: linear-gradient(rgba(20, 108, 67, 0.85), rgba(25, 135, 84, 0.9)), url('logo_bolmong.png') no-repeat center center;
     background-size: cover;
     
     min-height: 100vh; 
     width: 100%;
     
-    /* 👇 Menggunakan padding berbasis viewport height (vh) agar posisi card sangat presisi di HP */
-    padding-top: 6vh !important; 
-    padding-bottom: 4vh !important;
+    /* 👇 PERBAIKAN: Menggunakan padding seragam agar posisi vertikalnya seimbang murni dari flexbox */
+    padding: 20px 0 !important;
     box-sizing: border-box;
 }
 
@@ -107,7 +105,7 @@ html, body {
 </head>
 <body>
 
-<div id="loginPage" class="w-100 d-flex flex-column align-items-center">
+<div id="loginPage" class="w-100 d-flex flex-column justify-content-center align-items-center">
     <div class="row justify-content-center w-100 mx-0">
         <div class="col-12 col-sm-8 col-md-5 col-lg-4 px-3">
             <div class="card login-card p-4">
@@ -289,14 +287,13 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
     }
 });
 
-// 👇 PERBAIKAN EROR FUNGSI LOGOUT (Menyelaraskan kelas agar layout tetap konsisten)
 document.getElementById("logoutBtn").addEventListener("click", () => {
     document.getElementById("username").value = "";
     document.getElementById("password").value = "";
     document.getElementById("mainContent").classList.add("d-none");
     
     const loginPage = document.getElementById("loginPage");
-    loginPage.className = "w-100 d-flex flex-column align-items-center";
+    loginPage.className = "w-100 d-flex flex-column justify-content-center align-items-center";
     document.getElementById("loginPage").classList.remove("d-none");
     
     select.innerHTML = "";
