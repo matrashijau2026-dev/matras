@@ -9,28 +9,26 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
-/* 👇 PERBAIKAN 1: Paksa HTML dan BODY menggunakan tinggi penuh */
+/* 👇 Amankan elemen dasar agar setinggi layar HP */
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    background-color: #146c43; /* Jika web loading, background langsung hijau */
+    background-color: #146c43; /* Warna dasar hijau tua */
 }
 
-body {
-    padding-bottom: 30px;
-}
-
-/* 📱 OPTIMALISASI HALAMAN LOGIN (MOBILE FRIENDLY) */
+/* 📱 OPTIMALISASI HALAMAN LOGIN (ANTI TERPOTONG) */
 #loginPage {
     background: linear-gradient(rgba(20, 108, 67, 0.85), rgba(25, 135, 84, 0.9)), url('logo_bolmong.png') no-repeat center center fixed;
     background-size: cover;
-    height: 100%; 
+    
+    /* Ganti properti height menjadi min-height agar layout fleksibel */
+    min-height: 100vh; 
     width: 100%;
     
-    /* 👇 PERBAIKAN UTAMA: Tambahkan padding atas agar konten turun & tidak terpotong poni/kamera HP */
-    padding-top: 40px !important; 
-    padding-bottom: 20px !important;
+    /* 👇 KUNCI PERBAIKAN: Berikan padding atas 50px agar teks 'Username' terdorong ke bawah aman dari poni HP */
+    padding-top: 50px !important; 
+    padding-bottom: 50px !important;
 }
 
 .login-card {
