@@ -23,11 +23,14 @@ body {
 
 /* 📱 OPTIMALISASI HALAMAN LOGIN (MOBILE FRIENDLY) */
 #loginPage {
-    /* 👇 PERBAIKAN 2: Ubah min-height menjadi height: 100% agar Bootstrap meregang sempurna */
     background: linear-gradient(rgba(20, 108, 67, 0.85), rgba(25, 135, 84, 0.9)), url('logo_bolmong.png') no-repeat center center fixed;
     background-size: cover;
     height: 100%; 
     width: 100%;
+    
+    /* 👇 PERBAIKAN UTAMA: Tambahkan padding atas agar konten turun & tidak terpotong poni/kamera HP */
+    padding-top: 40px !important; 
+    padding-bottom: 20px !important;
 }
 
 .login-card {
